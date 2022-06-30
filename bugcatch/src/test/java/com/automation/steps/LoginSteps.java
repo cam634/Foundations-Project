@@ -21,7 +21,7 @@ public class LoginSteps {
 @Given("the manager is on the login page")
 public void the_manager_is_on_the_login_page() {
     // Write code here that turns the phrase above into concrete actions
-   TestRunner.driver.get("File:///Users/cameronhauser/Documents/GitHub/Automation-Project/Bugcatch/bugcatch/src/test/resources/webpages/index.html");
+   TestRunner.driver.get("File:///Users/cameronhauser/Documents/GitHub/Automation-Project/Bugcatch/Foundations-Project/bugcatch/src/test/resources/webpages/index.html");
 }
 
 
@@ -56,7 +56,7 @@ TestRunner.wait.until(ExpectedConditions.titleIs("Manager"));
 @Given("the tester is on the login page")
 public void the_tester_is_on_the_login_page() {
     // Write code here that turns the phrase above into concrete actions
-    TestRunner.driver.get("File:///Users/cameronhauser/Documents/GitHub/Automation-Project/Bugcatch/bugcatch/src/test/resources/webpages/index.html");
+    TestRunner.driver.get("File:///Users/cameronhauser/Documents/GitHub/Automation-Project/Bugcatch/Foundations-Project/bugcatch/src/test/resources/webpages/index.html");
 }
 
 

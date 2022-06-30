@@ -25,10 +25,10 @@ console.log(responseBody)
 // converts the response body json into a JavaScript object
 if(responseBody.role === "Manager"){
     localStorage.setItem('emp', JSON.stringify(responseBody));
-    window.location.replace('File:///Users/cameronhauser/Documents/GitHub/Automation-Project/Bugcatch/bugcatch/src/test/resources/webpages/Manager/index.html')
+    window.location.replace('File:///Users/cameronhauser/Documents/GitHub/Automation-Project/Bugcatch/Foundations-Project/bugcatch/src/test/resources/webpages/Manager/index.html')
 }else if(responseBody.role === "Tester"){
     localStorage.setItem('emp', JSON.stringify(responseBody));
-    window.location.replace('File:///Users/cameronhauser/Documents/GitHub/Automation-Project/Bugcatch/bugcatch/src/test/resources/webpages/Tester/index.html')
+    window.location.replace('File:///Users/cameronhauser/Documents/GitHub/Automation-Project/Bugcatch/Foundations-Project/bugcatch/src/test/resources/webpages/Tester/index.html')
 }else{
     alert("please contact it to set your role")
 }}

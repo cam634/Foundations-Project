@@ -19,7 +19,7 @@ public class TesterSteps {
     public void the_tester_is_on_their_home_profile() {
         // Write code here that turns the phrase above into concrete actions
         
-        TestRunner.driver.get("File:///Users/cameronhauser/Documents/GitHub/Automation-Project/Bugcatch/bugcatch/src/test/resources/webpages/Tester/index.html");
+        TestRunner.driver.get("File:///Users/cameronhauser/Documents/GitHub/Automation-Project/Bugcatch/Foundations-Project/bugcatch/src/test/resources/webpages/Tester/index.html");
     }
     
         

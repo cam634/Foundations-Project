@@ -1,6 +1,5 @@
 package com.automation.runner;
 
-import java.util.concurrent.TimeUnit;
 
 import org.junit.AfterClass;
 import org.junit.BeforeClass;
@@ -16,10 +15,10 @@ import com.automation.poms.Tester;
 
 import io.cucumber.junit.Cucumber;
 import io.cucumber.junit.CucumberOptions;
-import io.cucumber.messages.Messages.Duration;
+
 
 @RunWith(Cucumber.class)
-@CucumberOptions(features="src/test/resources/features", glue="com/automation/steps")
+@CucumberOptions(features="src/test/resources/features", glue="com/automation/steps", plugin = {"pretty", "html:src/test/resources/reports/html-reports.html"})
 public class TestRunner {
     public static WebDriver driver;
     public static Login login;
