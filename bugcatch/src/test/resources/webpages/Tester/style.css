@@ -1,0 +1,29 @@
+td, th , #pendingdects tr{
+    border: 1px solid #dddddd;
+    text-align: left;
+    padding: 8px;
+    
+  }
+  tr {
+
+    padding-bottom: 50px;
+  }
+  #pendingDefects{
+    text-align: left;
+    display: block;
+    float: left;
+    width: 100%;
+  }
+  table {
+    width: 80%;
+  }
+  hr{
+    background-color: black;
+    padding-top: 1.5px;
+    padding-bottom: 1.5px;
+    margin-bottom: 50px;
+    margin-top: 50px;
+    border: none;
+  }
+
+

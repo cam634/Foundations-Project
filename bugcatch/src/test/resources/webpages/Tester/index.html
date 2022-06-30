@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tester</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body onload="createPendingDefects(), getProjectandcheckSummaries()">
+    <h1>Please accept or deny Pending defects</h1>
+    <table id="table1">
+        
+        <table id="pendingdects">
+
+        </table>
+        
+        
+        
+       
+        <table id="table2"> 
+        <br>
+        <hr>
+        <H1>Pending Accepted defects</H1>
+        <br>
+       
+            <table id="accepetedDefects">
+                
+
+
+            </table>
+        </tr>
+    </table>
+    <hr>
+    <div id="tester">
+    <h1>Create Project</h1>
+    <label><input id="createProjectTittle" type="text" required placeholder="Project Title"></label>
+    <br>
+    <label><textarea name="" id="createProjectDescription" cols="30" rows="10" placeholder="Project Description"></textarea></label>
+    <br>
+    <label><button id="createProjectBTN">Create Project</button></label>
+    <br>
+    <hr>
+    </div>
+        
+
+
+    </table>
+     
+    <table id="openProjects">
+        
+
+    </table>
+<hr>
+    <h1>Summary Report</h1>
+    
+    <table id="summaryReport">
+        
+
+    </table>
+</body>
+<script>
+const password = document.getElementById('pendingdects')
+const accepetedDefects = document.getElementById('accepetedDefects')
+const openProjects = document.getElementById('openProjects')
+const summaryReport = document.getElementById('summaryReport')
+
+async function createPendingDefects(){
+
+    let cookie = JSON.parse(localStorage.getItem('emp'))
+    console.log(cookie.username)
+
+
+let httpresponse  = await fetch(`https://bugcatcher.coe.revaturelabs.com/4/defects`)
+console.log(httpresponse)
+
+let count = 0
+if(httpresponse.status == 200){
+    
+    accepetedDefects.innerHTML =""
+    password.innerHTML =""
+    const responseBody = await httpresponse.json();
+    console.log(responseBody)
+    password.innerHTML= `<tr>
+            <th>Defect ID</th>
+            <th>Defect</th>
+            <th>Accept or decline</th>
+            
+            <th>Submit</th>
+        </tr>`
+
+    accepetedDefects.innerHTML= `<th>Defect ID</th>
+            <th>Defect</th>
+            <th>Status</th>
+            <th>Submit</th>`
+    for(num in responseBody){
+        console.log(responseBody[num]['status'])
+        
+        if(responseBody[num]['assignedTo'] === cookie.username && responseBody[num]['status'] === "Pending"){
+        count = count + 1
+            responseBody[num]['assignedTo']  
+            password.innerHTML = password.innerHTML + `<tr><td id="test${count}">${responseBody[num]['defectId']}</td><td>
+            ${responseBody[num]['desc']}
+            </td>
+            <td>
+                <select class="acceptDecline" name="acceptDecline" id="acceptDecline${count}">
+                    <option  id="first" value="">Select One</option>
+                    <option id="first" value="Accepted">Accept</option>
+                    <option id="first" value="Declined">Decline</option>
+                </select>
+            </td>
+            <td>
+            <input id="pendingsubmitbutton" type="submit" onclick="submit()">
+            </td> ` 
+
+        }else if(responseBody[num]['assignedTo'] === cookie.username && responseBody[num]['status'] === "Accepted"){
+            count = count + 1
+            
+            responseBody[num]['assignedTo']  
+            accepetedDefects.innerHTML = accepetedDefects.innerHTML + `<tr><td id="test${count}">${responseBody[num]['defectId']}</td><td>
+            ${responseBody[num]['desc']}
+            </td>
+                <td>
+                    <select class="acceptDecline" name="accepteddefects" id="acceptDecline${count}">
+                    <option  id="first" value="">Select One</option>
+                    <option id="first" value="Shelved">Defect Shelved</option>
+                    <option id="first" value="Rejected">Rejected</option>
+                    <option id="first" value="Fixed">Fixed</option>
+                </select>
+            </td>
+            <td>
+            <input type="submit" onclick="submit()">
+            </td> ` 
+        }
+        
+    }
+} 
+
+    
+
+}
+
+
+async function submit(){
+    
+    
+    for(let x = 1; x <= document.getElementsByClassName("acceptDecline").length; x++){
+        let test = document.getElementById(`acceptDecline${x}`)
+    
+        
+       
+        if(test.options[test.selectedIndex].value === "Accepted" || test.options[test.selectedIndex].value === "Declined" || test.options[test.selectedIndex].value === "Rejected" || test.options[test.selectedIndex].value === "Fixed" || test.options[test.selectedIndex].value === "Shelved" ){
+            console.log(test.options[test.selectedIndex].value)
+           let valueChanging = document.getElementById(`test${x}`).innerText
+           console.log(test.options[test.selectedIndex].value)
+           let bodyInfo ={
+            status: test.options[test.selectedIndex].value ,
+            }
+    let bodyInfoJSon = JSON.stringify(bodyInfo)
+
+        let config = {
+         method: "PATCH",
+         headers:{'Content-type': 'application/json; charset=UTF-8'},
+        body: bodyInfoJSon
+        }
+        console.log(`https://bugcatcher.coe.revaturelabs.com/4/defects/${valueChanging}`)
+        const httpResponse = await fetch(`https://bugcatcher.coe.revaturelabs.com/4/defects/${valueChanging}`, config);
+        if(httpResponse.status == 204){
+        console.log(httpResponse)
+        alert('updated')
+        }
+           
+    }    
+            }
+            
+            createPendingDefects()
+        }
+
+
+    async function getProjectandcheckSummaries(){
+    
+     openProjects.innerHTML = ''
+    const httpResponse = await fetch("https://bugcatcher.coe.revaturelabs.com/4/projects")
+    const httpResponse2 = await fetch("https://bugcatcher.coe.revaturelabs.com/4/summaries")
+    console.log(httpResponse2)
+    if(httpResponse.status == 200 && httpResponse2.status == 200){
+
+        const responseBody = await httpResponse.json();
+        const responseBody2 = await httpResponse2.json();
+        const searchObject= responseBody2.find((project) => project.projectId=="14933")
+        const searchIndex = responseBody2.findIndex((project) => project.projectId=="14933");
+                console.log(searchIndex)
+
+                openProjects.innerHTML = `<tr>
+            <th>Summary ID if report avaliable if not Project ID</th>
+            <th>Project Title</th>
+            <th>Description</th>
+
+            <th>View / create summary ID</th>
+        </tr>`
+
+
+
+        for(let x = 0; x <responseBody.length; x++){
+       
+        let searchIndex = responseBody2.findIndex((project) => project.projectId==`${responseBody[x]['projectId'] }`);
+                if(searchIndex>=0){
+                    let searchObject= responseBody2.find((project) => project.projectId==`${responseBody[x]['projectId'] }`)
+                    console.log(searchObject.summaryId)
+                    openProjects.innerHTML = openProjects.innerHTML + `<tr><td>${searchObject.summaryId}</td><td>
+            ${responseBody[x]['title']}
+            </td>
+            <td>
+                ${responseBody[x]['description']}
+            </td>
+            <td>
+                <label><button onclick="viewTestSummary(${searchObject.summaryId})">View Test Summary report</button></label>
+            </td>` 
+
+
+
+                }else {
+                    openProjects.innerHTML = openProjects.innerHTML + `<tr><td>${responseBody[x]['projectId']}</td><td>
+            ${responseBody[x]['title']}
+            </td>
+            <td>
+                ${responseBody[x]['description']}
+            </td>
+            <td>
+                <label><button onclick="createTestSummary(${responseBody[x]['projectId']})">Create Test Summary report</button></label>
+            </td>` 
+
+                }
+               
+
+            } {
+
+            }
+            console.log(responseBody)
+    console.log(responseBody2)}
+        }
+
+
+        
+
+
+        async function viewTestSummary(value){
+            const httpResponse = await fetch(`https://bugcatcher.coe.revaturelabs.com/4/summaries/${value}`)
+            console.log(httpResponse)
+            if(httpResponse.status == 200){
+            const responseBody = await httpResponse.json();
+            let isfinished
+            if(responseBody['isFinalized'] === false){
+                isfinished = "no"
+            }else{
+                isfinished = "yes"
+            }
+            
+                summaryReport.innerHTML  = `<tr>
+        <th>Start Date</th>
+        <th>Features In Scope</th>
+        <th>Test Environment Desc</th> 
+        <th>Objectives</th> 
+        <th>Reason For Testing</th>
+        <th>Overall Results</th>
+        <th>Is Finished?</th>
+        </tr>`
+                
+                summaryReport.innerHTML = summaryReport.innerHTML + `<tr><td>${responseBody['startDate']}</td><td>
+            ${responseBody['featuresInScope']}
+            </td>
+            <td>
+            ${responseBody['testEnvironmentDesc']}
+            </td>
+            <td>
+            ${responseBody['objectives']}
+            </td>
+            <td>
+            ${responseBody['reasonForTesting']}
+            </td>
+            <td>
+            ${responseBody['overallResults']}
+            </td>
+            <td>
+            ${isfinished}
+            </td>
+             `
+            }
+        }
+       
+
+</script>
+</html>

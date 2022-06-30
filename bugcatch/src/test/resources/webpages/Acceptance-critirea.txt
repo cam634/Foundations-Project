@@ -1,0 +1,66 @@
+Manager Accepetance Critiera Login 
+
+FEATURE managers should be to login to access their homepage
+
+    SCENARIO as a manager I want to sign in so I can view 
+
+    Given the manager is on the login page 
+    When the manager enter his correct  username
+    When the manager enter his correct password
+    When the manager click the login button
+    then the manager should be logged in to the manager home page 
+
+
+FEATURE managers should be able to enter any defects 
+
+    SCENARIO as a manager I want to be able create a defect with a short description of the issue
+
+    Given the manager is on the manager portal page 
+    When the manager enters the short description 
+    When the manager clicks the submit button it will be saved
+    then the manager should have a short description of a defect
+
+
+Tester acceptenace Critiera 
+
+FEATURE tester should be to login to access their homepage
+
+    SCENARIO as a tester I want to sign in so I can view my custom homepage
+
+    Given the test is on the login page 
+    WHEN the tester enter his username
+    WHEN the tester enter his password
+    WHEN the tester click the login button
+    THEN the tester should be logged in to the tester home page
+FEATURE Tester should be able to view the defects assigned to them 
+
+    SCENARIO As a tester I want to be able to see which defects are assigned to me 
+
+    GIVEN The tester is on their home profile
+
+    WHEN the tester lands on their page they should see their assigned task 
+    THEN the tester should be able to see all the things they were assigned by the manager 
+
+FEATURE Testers should be able to Accepet or Decline defect
+
+    SCENARIO As a Tester I want to be able to decline defects if they are low priority 
+
+    GIVEN The tester is selecting decline
+    THEN The tester  selects decline it holds decline 
+
+    SCENARIO As a tester I want to be able accept 
+
+    GIVEN The tester is selecting accept 
+    THEN It will be open another to reclassify it 
+
+SCENARIO once the tester accepts it then should be able to be classified by a select box in dfect rejected defect fixed ,defect shelved, defect rejected
+
+    GIVEN the tester accepts 
+    THEN  A new th and tr will appear with a select box 
+    THEN Once reclassified then the user will be able to resubmit the form
+
+
+
+
+
+    

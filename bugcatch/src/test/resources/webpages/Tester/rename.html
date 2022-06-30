@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+   <h1>Please accpet or decline</h1>
+    <tr>
+       <th>Defect</th>
+       <th>Accept/Decline</th>  
+    </tr>
+    <div id="defcts">
+ 
+   </div>
+
+   <tr>
+      <th>Defect</th>
+      <th>Status</th>
+   </tr>
+   <tr>
+      <tr>broken algo</tr>
+      <tr>defect fixed</tr>
+   </tr>
+   <link rel="stylesheet" href="style.css">
+</body>
+</html>
+<script>
+
+const Defect = "Defect"
+const tableElements = document.getElementById('defcts')
+function loadDefect(){
+let div = document.createElement('div')
+div.innerHTML = `<tr>${Defect}</tr>
+   <tr>
+    <select name="acceptedDeclined" id="acceptedDeclined">
+        <option value="">Select One</option>
+        <option value="">Accepeted</option>
+        <option value="">Decline</option>
+   </select>
+</tr>`
+tableElements.appendChild(div)
+}
+
+
+
+
+
+</script>

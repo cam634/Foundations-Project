@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Manager</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body onload="getTesters()">
+    
+    <table>
+        <tr>
+            <th>Defect</th>
+            <th>Assign Defect</th>
+            <th>Submit</th>
+        </tr>
+        <tr>
+            <td>
+            <input id="Defect"  type="text" placeholder="Defect Descripton">
+            </td>
+            <td>
+                <select name="defectAssign" id="DefectAssgin">
+
+                </select>
+            </td>
+            <td>
+            <input id="btn" type="submit">
+            </td>
+        </tr>
+    </table>
+</body>
+<script>
+const Defect = document.getElementById('Defect')
+const defectAssign = document.getElementById('DefectAssgin')
+const submitButton = document.getElementById('btn')
+
+
+let count 
+
+async function getTesters(){
+    let httpresponse  = await fetch(`https://bugcatcher.coe.revaturelabs.com/4/employees`)
+console.log(httpresponse.status)
+
+let result = `<option value="">Select One</option>`
+if(httpresponse.status == 200){
+    const responseBody = await httpresponse.json();
+    console.log(responseBody)
+    for(num in responseBody){
+        if(responseBody[num]['role'] === 'Tester'){
+        
+        result = result + `<option value="${responseBody[num]['username']}">${responseBody[num]['username']}</option>`
+        defectAssign.innerHTML = result
+}
+}
+}}
+
+async function testDefect(){
+
+
+let bodyInfo ={
+    
+  assignedTo: defectAssign.options[defectAssign.selectedIndex].value,
+  dateReported: 0,
+  desc: Defect.value,
+  stepsToReproduce: "none",
+  severity: "Low",
+  priority: "Low"
+
+}
+let bodyInfoJSon = JSON.stringify(bodyInfo)
+
+let config = {
+    method: "POST",
+    headers:{'Content-type': 'application/json; charset=UTF-8'},
+    body: bodyInfoJSon
+}
+const httpResponse = await fetch("https://bugcatcher.coe.revaturelabs.com/4/defects", config);
+if(httpResponse.status < 300){
+console.log(httpResponse)
+}
+if(httpResponse.status === 201){
+
+alert(httpResponse.statusText)
+}
+}
+
+submitButton.addEventListener('click', testDefect)
+
+
+
+</script>
+</html>
