@@ -3,3 +3,20 @@ td, th {
     text-align: left;
     padding: 8px;
   }
+  table{
+    
+    margin: auto;
+    padding-right: 30px;
+    
+  }
+  h1{
+    padding-top: 350px;
+    padding-right: 20px;
+text-align: center;
+color: red;
+  }
+  body{
+    background-image: url(https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fwallup.net%2Fwp-content%2Fuploads%2F2019%2F10%2F747572-big-hero-6-animation-action-adventure-disney-robot-superhero-big-hero-futuristic.jpg&f=1&nofb=1);
+    background-size: cover;
+    background-repeat: no-repeat;
+  }

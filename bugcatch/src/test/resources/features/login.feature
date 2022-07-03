@@ -8,7 +8,7 @@ Feature: Users of my bug catcher application should be able to login to their re
 
     Scenario:   As a tester I want to sign in so I can view my custom homepage
 
-        Given   the tester is on the login page
+        Given   the manager is on the login page
         When    the tester enters his correct username
         When    the tester enters his correct password
         When    the tester clicks the login button
