@@ -31,7 +31,7 @@ public class TestRunner {
     
         driver = new ChromeDriver();
         login = new Login(driver);
-        wait = new WebDriverWait(driver, 15);
+        wait = new WebDriverWait(driver, 1);
         manager = new Manager(driver);
         tester = new Tester(driver);
     }

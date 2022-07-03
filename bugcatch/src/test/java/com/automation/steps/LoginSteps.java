@@ -7,9 +7,9 @@ import com.automation.runner.TestRunner;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
-import junit.framework.Assert;
 import java.util.concurrent.TimeUnit;
 
+import org.junit.Assert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.support.ui.ExpectedCondition;
 import org.openqa.selenium.support.ui.ExpectedConditions;
@@ -80,6 +80,7 @@ public void the_tester_clicks_the_login_button() {
 public void the_tester_should_be_logged_in_to_the_tester_home_page() {
     // Write code here that turns the phrase above into concrete actions
     TestRunner.wait.until(ExpectedConditions.titleIs("Tester"));
+
     String title = TestRunner.driver.getTitle();
     Assert.assertEquals("Tester", title);
 }

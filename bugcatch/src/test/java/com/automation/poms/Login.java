@@ -41,7 +41,7 @@ public class Login {
     }
 
     public void clickButton(){
-        this.loginButton.click();
+        this.submitButton.click();
     }
     
    

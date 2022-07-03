@@ -25,5 +25,17 @@ td, th , #pendingdects tr{
     margin-top: 50px;
     border: none;
   }
+  * {
+    box-sizing: border-box;
+  }
+  .modal-container{
+    display: flex;
+    pointer-events: none;
+    opacity: 0;
+  }
+  .modal-container.show{
+    opacity: 1;
+    pointer-events: auto;
+  }
 
 

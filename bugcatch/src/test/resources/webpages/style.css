@@ -1,0 +1,36 @@
+body{
+    background-image: url(https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fwww.pixilart.com%2Fimages%2Fart%2Ff41c0af36fce390.gif&f=1&nofb=1);
+    color: white ;
+    text-align: center;
+    align-items: center;
+    padding-top: 15px;
+    padding-bottom: 15px ;
+    display: block;
+}
+
+input{
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    text-align: center;
+    margin-top: 15px;
+    margin-bottom: 15px;
+}
+label{
+    display: block;
+}
+#btn{
+    background-color: white;
+    padding-left: 10px;
+    padding-right: 10px;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    border-radius: 10px;
+    
+}
+#btn:hover{
+    box-shadow: 2.5px 5px rgba(0, 0, 0, 0.28);
+}
+img{
+    margin: auto;
+}

@@ -103,8 +103,8 @@ if(httpresponse.status == 200){
             ${responseBody[num]['desc']}
             </td>
             <td>
-                <select class="acceptDecline" name="acceptDecline" id="acceptDecline${count}">
-                    <option  id="first" value="no">Select One</option>
+                <select class= "acceptDecline" name="acceptDecline" id="acceptDecline${count}">
+                    <option  id="first" value="">Select One</option>
                     <option id="first" value="Accepted">Accept</option>
                     <option id="first" value="Declined">Decline</option>
                 </select>
@@ -122,7 +122,7 @@ if(httpresponse.status == 200){
             </td>
                 <td>
                     <select class="acceptDecline" name="accepteddefects" id="acceptDecline${count}">
-                    <option  id="first" value="no">Select One</option>
+                    <option  id="first" value="">Select One</option>
                     <option id="first" value="Shelved">Defect Shelved</option>
                     <option id="first" value="Rejected">Rejected</option>
                     <option id="first" value="Fixed">Fixed</option>
@@ -287,6 +287,93 @@ async function submit(){
              `
             }
         }
+
+        const createProjectTittle = document.getElementById('createProjectTittle')
+        const createProjectDescription = document.getElementById('createProjectDescription')
+
+        async function createProject(){
+
+            let bodyInfo ={
+                
+        title: createProjectTittle.value,
+        about: createProjectDescription.value,
+            }
+    let bodyInfoJSon = JSON.stringify(bodyInfo)
+
+        let config = {
+         method: "POST",
+         headers:{'Content-type': 'application/json; charset=UTF-8'},
+        body: bodyInfoJSon
+        }
+        
+        const httpResponse = await fetch(`https://bugcatcher.coe.revaturelabs.com/4/projects`, config);
+        if(httpResponse.status == 200){
+        console.log(httpResponse)
+        alert('updated')
+        getProjectandcheckSummaries()
+        }
+            
+
+        }
+        const objectivessummaryreport = document.getElementById('objectivessummaryreport')
+       async function createTestSummary(){
+        const d1 = new Date().getTime();
+
+        const endDay = document.getElementById('summaryendday').value * 86400000
+
+
+        let bodyInfo ={
+
+            
+  projectId: document.getElementById('ProjectId').innerText,
+  startDate: d1,
+  endDate: endDay + d1,
+  featuresInScope: [
+  document.getElementById('featuresinscope').value
+  ],
+  testEnvironmentDesc: document.getElementById('testenviromentdescription').value,
+  objectives: [
+  objectivessummaryreport.options[objectivessummaryreport.selectedIndex].value
+  ],
+  reasonForTesting: document.getElementById('reasonfortesting').value
+
+                
+             
+                    }
+            let bodyInfoJSon = JSON.stringify(bodyInfo)
+        
+                let config = {
+                 method: "POST",
+                 headers:{'Content-type': 'application/json; charset=UTF-8'},
+                body: bodyInfoJSon
+                }
+                
+                const httpResponse = await fetch(`https://bugcatcher.coe.revaturelabs.com/4/summaries`, config);
+                if(httpResponse.status == 200){
+                console.log(httpResponse)
+                alert('updated')
+                getProjectandcheckSummaries()
+                }
+                modalcontainer.classList.remove('show')   
+                getProjectandcheckSummaries()
+                alert("Created")
+
+       }
+
+const opensummary = document.getElementById('opensummary');
+const modalcontainer = document.getElementById('modal_container');
+const summarysubmit = document.getElementById('summarysubmit');
+const inputProjectId = document.getElementById('ProjectId');
+
+opensummary.addEventListener('click', () =>{
+    modalcontainer.classList.add('show')
+})
+
+function test(value){
+    modalcontainer.classList.add('show')   
+    inputProjectId.innerText = value
+    
+}
        
 
 </script>
