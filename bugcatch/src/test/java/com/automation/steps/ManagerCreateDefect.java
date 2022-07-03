@@ -1,13 +1,13 @@
 package com.automation.steps;
 
-import java.sql.Driver;
+
 
 import com.automation.runner.TestRunner;
 
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
-import java.util.concurrent.TimeUnit;
+
 
 import org.junit.Assert;
 import org.openqa.selenium.By;
@@ -25,13 +25,13 @@ public void the_manager_is_on_the_manager_homepage_page() {
 @When("the manager enters a defect")
 public void the_manager_enters_a_defect() {
     // Write code here that turns the phrase above into concrete actions
-    TestRunner.manager.enterDefect("Defect Automation Test");
+    TestRunner.manager.enterDefect("Cat fell and broke their leg");
 }
 @When("the manager assigns it to a tester")
 public void the_manager_assigns_it_to_a_tester() {
     // Write code here that turns the phrase above into concrete actions
     Select assignDefect = new Select(TestRunner.driver.findElement(By.id("DefectAssgin")));
-    assignDefect.selectByVisibleText("Tester");
+    assignDefect.selectByVisibleText("Baymax");
 }
 @When("the manager clicks the submit button")
 public void the_manager_clicks_the_submit_button() {

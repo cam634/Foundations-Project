@@ -6,13 +6,10 @@ import org.openqa.selenium.support.PageFactory;
 
 
 public class Tester {
-    private WebDriver driver;
-
     @FindBy(id = "pendingsubmitbutton")
     public WebElement submitButtonTester;
 
     public Tester(WebDriver driver){
-        this.driver = driver;
         PageFactory.initElements(driver, this);
 
     }

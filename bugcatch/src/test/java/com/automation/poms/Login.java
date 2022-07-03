@@ -10,8 +10,6 @@ import org.openqa.selenium.support.PageFactory;
 public class Login {
 
 
-    private WebDriver driver;
-
     @FindBy(id = "username")
     public WebElement usernameInput;
     @FindBy(id = "password")
@@ -27,7 +25,6 @@ public class Login {
     
 
     public Login(WebDriver driver){
-        this.driver = driver;
         PageFactory.initElements(driver, this);
 
     }
