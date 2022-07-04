@@ -40,11 +40,9 @@ public void the_manager_clicks_the_submit_button() {
 }
 @Then("the manager should see a alert with a defect")
 public void the_manager_should_see_a_alert_with_a_defect() {
-    TestRunner.wait.until(ExpectedConditions.alertIsPresent());
+    TestRunner.wait.until(ExpectedConditions.textToBePresentInElement(TestRunner.driver.findElement(By.id("created")),"created"));
     // Write code here that turns the phrase above into concrete actions
-    String checkIfCreated = TestRunner.driver.switchTo().alert().getText();
-     Assert.assertEquals("Created", checkIfCreated);
-     TestRunner.driver.switchTo().alert().dismiss();
+
 }
 
 

@@ -12,6 +12,7 @@ public class Manager {
     public WebElement defectDescription;
     
     
+    
 
     public Manager(WebDriver driver){
         PageFactory.initElements(driver, this);

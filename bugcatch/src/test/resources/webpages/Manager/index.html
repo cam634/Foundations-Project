@@ -6,8 +6,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Manager</title>
     <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Raleway+Dots&display=swap" rel="stylesheet">
 </head>
 <body onload="getTesters()">
+    <h2 id="created"></h2>
     <h1>Create Issue for Baymax</h1>
     
     <table>
@@ -55,9 +60,9 @@ if(httpresponse.status == 200){
 }
 }
 }}
-
+const creator =document.getElementById("created")
 async function testDefect(){
-
+creator.innerText = ""
 
 let bodyInfo ={
     
@@ -81,11 +86,17 @@ if(httpResponse.status < 300){
 console.log(httpResponse)
 }
 if(httpResponse.status === 201){
+    creator.innerText = "created"  
+setTimeout(CreateCreateElement,10000);
+
+
 
 alert(httpResponse.statusText)
 }
 }
-
+function CreateCreateElement(){
+    creator.innerText = ""
+}
 submitButton.addEventListener('click', testDefect)
 
 
